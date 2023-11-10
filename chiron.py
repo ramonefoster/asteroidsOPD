@@ -9,9 +9,9 @@ import random
 from astropy.visualization import simple_norm
 
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QTimer, QUrl, pyqtSlot
+from PyQt5.QtCore import QTimer, Qt, pyqtSlot
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QFileDialog
 import threading
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -34,6 +34,7 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         self.plate_solve = PlateSolve()
 
         self.btnGo.clicked.connect(self.solve_field)
+        self.btnFile.clicked.connect(self.get_file)
 
         self._abort = threading.Event()
 
@@ -72,14 +73,18 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
                     dec_center = self.plate_solve.result[1]
                     wcs = self.plate_solve.result[2]
                     path_img = self.txtFITS.text()
-                    filename = get_pkg_data_filename(path_img)
-                    hdu = fits.open(filename)[0]
-                    self.txtRASolved.setText(utils.hours_to_hms(ra_center))
-                    self.txtDECSolved.setText(utils.degrees_to_dms(dec_center))
-                    if not self.plot_ready: 
-                        self.plot_fits(hdu, ra_center, dec_center, wcs)
-                        self.plot_ready = True 
-                    self.labelPlateSolve.setText("Completed")
+                    try:
+                        #filename = get_pkg_data_filename(path_img)
+                        hdu = fits.open(self.txtFITS.text())[0]
+                        self.txtRASolved.setText(utils.hours_to_hms(ra_center))
+                        self.txtDECSolved.setText(utils.degrees_to_dms(dec_center))
+                        if not self.plot_ready: 
+                            self.plot_fits(hdu, ra_center, dec_center, wcs)
+                            self.plot_ready = True 
+                        self.labelPlateSolve.setText("Completed")
+                    except Exception as e:
+                        print(e)
+                        self.labelPlateSolve.setText("Error"+str(e))
                     self.progressBar.setValue(0)
                 elif isinstance(self.plate_solve.result, str):
                     self.txtRASolved.setText('')
@@ -89,6 +94,9 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
                 else:
                     self.labelPlateSolve.setText("Error...")
                     self.progressBar.setValue(0)
+    
+    def get_file(self):
+        self.txtFITS.setText(QFileDialog.getOpenFileName(None, "Open File", "C:/", "fits (*.fits)")[0])
         
     def plot_fits(self, hdu, ra_center, dec_center, w):
         header = hdu.header 
@@ -144,8 +152,18 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         canvas = FigureCanvas(fig)
         canvas.draw()
 
-        width, height = fig.get_size_inches() * fig.get_dpi()
-        image = QImage(canvas.buffer_rgba(), width, height, QImage.Format_RGB32)
+        width, height = int(fig.get_size_inches()[0] * fig.get_dpi()), int(fig.get_size_inches()[1] * fig.get_dpi())
+        image = QImage(width, height, QImage.Format_RGB32)
+        image.fill(Qt.white)
+
+        painter = QPainter(image)
+        canvas.render(painter)
+        painter.end()
+
+        # Display the QImage in the QLabel, scaled to fit
+        pixmap = QPixmap.fromImage(image)
+        pixmap = pixmap.scaled(self.image_label.size(), aspectRatioMode=Qt.KeepAspectRatio)
+        self.image_label.setPixmap(pixmap)
 
         # Display the QImage in the QLabel
         self.image_label.setPixmap(QPixmap.fromImage(image))
