@@ -2,17 +2,14 @@ from astropy.coordinates import SkyCoord
 import matplotlib.pyplot as plt
 import numpy as np
 from astropy.io import fits
-from astropy.utils.data import get_pkg_data_filename
 from astroquery.jplhorizons import Horizons
-from astropy.wcs import WCS
-import astropy.units as u
 import twirl
 import time
 import random
 from astropy.visualization import simple_norm
 
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QTimer, Qt, pyqtSlot, QDateTime
+from PyQt5.QtCore import QTimer, Qt, QDateTime
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import QFileDialog 
 import threading
@@ -62,7 +59,7 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.plate_solve.state:
             self.plate_solve.stop()
             self.plate_solve.join()
-            self.plate_solve = PlateSolve()
+            # self.plate_solve = PlateSolve()
         else:
             if self.txtFITS.text().endswith(".fits"):
                 self.plate_solve.fits = self.txtFITS.text()
