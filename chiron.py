@@ -11,7 +11,7 @@ from astropy.visualization import simple_norm
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer, Qt, QDateTime
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QFileDialog 
+from PyQt5.QtWidgets import QMessageBox, QFileDialog, QInputDialog, QVBoxLayout, QPushButton, QLineEdit, QDialog, QLabel
 import threading
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -36,6 +36,8 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btnGo.clicked.connect(self.solve_field)
         self.btnFile.clicked.connect(self.get_file)
 
+        self.btnSimbad.clicked.connect(self.choose_object)
+
         self._abort = threading.Event()
 
         self.timer = QTimer()
@@ -51,6 +53,41 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.plot_ready = False
     
+    def choose_object(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Choose Object")
+
+        layout = QVBoxLayout(dialog)
+
+        label = QLabel("Insert SIMBAD ID:", dialog)
+        label.setStyleSheet("color: rgb(255, 255, 255);")
+        layout.addWidget(label)
+
+        input_text = QLineEdit(dialog)
+        layout.addWidget(input_text)
+
+        search_button = QPushButton('Search', dialog)
+        search_button.setStyleSheet("color: rgb(255, 255, 255);")
+        cancel_button = QPushButton('Cancel', dialog)
+        cancel_button.setStyleSheet("color: rgb(255, 255, 255);")
+
+        search_button.clicked.connect(dialog.accept)
+        cancel_button.clicked.connect(dialog.reject)
+
+        layout.addWidget(search_button)
+        layout.addWidget(cancel_button)
+
+        result = dialog.exec_()
+
+        if result == QDialog.Accepted:
+            entered_text = input_text.text()            
+            try:
+                ra, dec = utils.simbad_radec(entered_text)
+                self.txtRA.setText(ra)
+                self.txtDEC.setText(dec)
+            except Exception as e:
+                print("Error Simbad"+str(e))            
+    
     def timer_status(self):
         self.timer.start(1000)
 
@@ -63,7 +100,17 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             if self.txtFITS.text().endswith(".fits"):
                 self.plate_solve.fits = self.txtFITS.text()
-                self.plate_solve.folder = None                
+                self.plate_solve.folder = None 
+                hdu = fits.open(self.txtFITS.text())[0]
+                data = hdu.data
+                image_shape = data.shape
+                if len(image_shape) == 2:
+                    h, w = image_shape
+                if len(image_shape) == 3:
+                    x, h, w = image_shape
+                self.plate_solve.pixel_x = w/2
+                self.plate_solve.pixel_y = h/2
+
                 self.plate_solve.start()
             else:
                 self.labelPlateSolve.setText("Invalid FITS.")
