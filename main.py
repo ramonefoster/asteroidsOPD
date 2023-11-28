@@ -11,7 +11,7 @@ from astropy.visualization import simple_norm
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer, Qt, QDateTime
 from PyQt5.QtGui import *
-from PyQt5.QtWidgets import QMessageBox, QFileDialog, QInputDialog, QVBoxLayout, QPushButton, QLineEdit, QDialog, QLabel
+from PyQt5.QtWidgets import QMenu, QFileDialog, QVBoxLayout, QPushButton, QLineEdit, QDialog, QLabel
 import threading
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
@@ -51,11 +51,32 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         self.startDate.setDateTime(current_datetime)
         self.endDate.setDateTime(current_datetime)
 
+        self.image_label.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.image_label.customContextMenuRequested.connect(self.show_context_menu)
+
         self.plot_ready = False
+    
+    def save_image(self):
+        image_path, _ = QFileDialog.getSaveFileName(self, "Save Image", "", "PNG Files (*.png);;JPEG Files (*.jpg *.jpeg)")
+
+        if image_path:
+            pixmap = self.image_label.pixmap()
+            if pixmap:
+                pixmap.save(image_path)
+    
+    def show_context_menu(self, position):
+        menu = QMenu(self)
+        menu.setStyleSheet("QMenu { background-color: #C0C0C0; }")
+
+        save_action = menu.addAction("Save Image")
+        save_action.triggered.connect(self.save_image)
+
+        menu.exec_(self.image_label.mapToGlobal(position))
     
     def choose_object(self):
         dialog = QDialog(self)
         dialog.setWindowTitle("Choose Object")
+        dialog.setFixedWidth(280)
 
         layout = QVBoxLayout(dialog)
 
@@ -64,6 +85,9 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
         layout.addWidget(label)
 
         input_text = QLineEdit(dialog)
+        input_text.setStyleSheet("font-size: 15px; color: white;")
+        input_text.setFixedHeight(30)
+
         layout.addWidget(input_text)
 
         search_button = QPushButton('Search', dialog)
@@ -93,27 +117,27 @@ class Solver(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def solve_field(self):  
         self.plot_ready = False 
-        if self.plate_solve.state:
+        if self.plate_solve.is_alive():
             self.plate_solve.stop()
             self.plate_solve.join()
-            # self.plate_solve = PlateSolve()
-        else:
-            if self.txtFITS.text().endswith(".fits"):
-                self.plate_solve.fits = self.txtFITS.text()
-                self.plate_solve.folder = None 
-                hdu = fits.open(self.txtFITS.text())[0]
-                data = hdu.data
-                image_shape = data.shape
-                if len(image_shape) == 2:
-                    h, w = image_shape
-                if len(image_shape) == 3:
-                    x, h, w = image_shape
-                self.plate_solve.pixel_x = w/2
-                self.plate_solve.pixel_y = h/2
 
-                self.plate_solve.start()
-            else:
-                self.labelPlateSolve.setText("Invalid FITS.")
+        self.plate_solve = PlateSolve()
+        if self.txtFITS.text().endswith(".fits"):
+            self.plate_solve.fits = self.txtFITS.text()
+            self.plate_solve.folder = None 
+            hdu = fits.open(self.txtFITS.text())[0]
+            data = hdu.data
+            image_shape = data.shape
+            if len(image_shape) == 2:
+                h, w = image_shape
+            if len(image_shape) == 3:
+                x, h, w = image_shape
+            self.plate_solve.pixel_x = w/2
+            self.plate_solve.pixel_y = h/2
+
+            self.plate_solve.start()
+        else:
+            self.labelPlateSolve.setText("Invalid FITS.")
     
     def update(self):
         if round(time.time(),0) % 5 == 0:

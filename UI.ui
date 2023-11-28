@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1049</width>
-    <height>569</height>
+    <width>1123</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,9 +24,9 @@
    <widget class="QPushButton" name="btnGo">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>530</y>
-      <width>93</width>
+      <x>20</x>
+      <y>590</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -38,10 +38,11 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(211, 211, 105);</string>
+     <string notr="true">background-color: rgb(58, 198, 50);
+border-radius: 10px;</string>
     </property>
     <property name="text">
-     <string>Solve</string>
+     <string>SOLVE</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtFITS">
@@ -49,7 +50,7 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>421</width>
+      <width>501</width>
       <height>30</height>
      </rect>
     </property>
@@ -88,7 +89,7 @@
    <widget class="QPushButton" name="btnFile">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>530</x>
       <y>70</y>
       <width>21</width>
       <height>21</height>
@@ -104,9 +105,9 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>529</y>
-      <width>331</width>
+      <x>570</x>
+      <y>570</y>
+      <width>531</width>
       <height>31</height>
      </rect>
     </property>
@@ -120,8 +121,8 @@
    <widget class="QLabel" name="labelPlateSolve">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>500</y>
+      <x>110</x>
+      <y>550</y>
       <width>421</width>
       <height>21</height>
      </rect>
@@ -141,12 +142,13 @@
      <rect>
       <x>20</x>
       <y>100</y>
-      <width>451</width>
-      <height>141</height>
+      <width>521</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -160,10 +162,10 @@
     <widget class="QLineEdit" name="txtDEC">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>230</x>
        <y>40</y>
-       <width>170</width>
-       <height>30</height>
+       <width>181</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -183,10 +185,10 @@
     <widget class="QLineEdit" name="txtRA">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>40</y>
-       <width>170</width>
-       <height>30</height>
+       <width>181</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -206,10 +208,10 @@
     <widget class="QDoubleSpinBox" name="spinFOV">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>100</y>
+       <x>140</x>
+       <y>110</y>
        <width>101</width>
-       <height>30</height>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -233,8 +235,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>100</y>
-       <width>91</width>
+       <y>110</y>
+       <width>121</width>
        <height>31</height>
       </rect>
      </property>
@@ -252,9 +254,9 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>20</y>
-       <width>170</width>
+       <width>181</width>
        <height>21</height>
       </rect>
      </property>
@@ -276,7 +278,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>431</width>
        <height>16</height>
       </rect>
@@ -298,9 +300,9 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>230</x>
        <y>20</y>
-       <width>170</width>
+       <width>181</width>
        <height>21</height>
       </rect>
      </property>
@@ -321,10 +323,10 @@
     <widget class="QSpinBox" name="spinStars">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>100</y>
+       <x>390</x>
+       <y>110</y>
        <width>91</width>
-       <height>30</height>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -347,9 +349,9 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>100</y>
-       <width>81</width>
+       <x>270</x>
+       <y>110</y>
+       <width>111</width>
        <height>31</height>
       </rect>
      </property>
@@ -367,10 +369,10 @@
     <widget class="QPushButton" name="btnSimbad">
      <property name="geometry">
       <rect>
-       <x>374</x>
+       <x>430</x>
        <y>40</y>
-       <width>71</width>
-       <height>31</height>
+       <width>81</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -393,13 +395,14 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>410</y>
-      <width>451</width>
-      <height>81</height>
+      <y>440</y>
+      <width>521</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -413,10 +416,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>290</x>
        <y>20</y>
-       <width>171</width>
-       <height>21</height>
+       <width>201</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
@@ -435,8 +438,8 @@ color: rgb(0, 0, 0);</string>
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>171</width>
-       <height>21</height>
+       <width>201</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
@@ -453,9 +456,9 @@ color: rgb(0, 0, 0);</string>
     <widget class="QLineEdit" name="txtDECSolved">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>40</y>
-       <width>171</width>
+       <x>290</x>
+       <y>50</y>
+       <width>201</width>
        <height>30</height>
       </rect>
      </property>
@@ -480,8 +483,8 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>40</y>
-       <width>171</width>
+       <y>50</y>
+       <width>201</width>
        <height>30</height>
       </rect>
      </property>
@@ -506,7 +509,7 @@ color: rgb(0, 0, 0);</string>
    <widget class="QLabel" name="image_label">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>560</x>
       <y>10</y>
       <width>550</width>
       <height>550</height>
@@ -530,7 +533,7 @@ color: rgb(0, 0, 0);</string>
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>451</width>
+      <width>521</width>
       <height>31</height>
      </rect>
     </property>
@@ -556,13 +559,14 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>260</y>
-      <width>451</width>
-      <height>141</height>
+      <y>280</y>
+      <width>521</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <pointsize>9</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -576,10 +580,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QDateTimeEdit" name="startDate">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>90</x>
        <y>70</y>
-       <width>131</width>
-       <height>25</height>
+       <width>151</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="dateTime">
@@ -619,10 +623,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QDateTimeEdit" name="endDate">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>300</x>
        <y>70</y>
-       <width>131</width>
-       <height>25</height>
+       <width>151</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="date">
@@ -636,7 +640,7 @@ color: rgb(0, 0, 0);</string>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>260</x>
        <y>70</y>
        <width>31</width>
        <height>21</height>
@@ -659,10 +663,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QSpinBox" name="spinStep">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>100</y>
-       <width>51</width>
-       <height>25</height>
+       <x>90</x>
+       <y>110</y>
+       <width>61</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="minimum">
@@ -676,7 +680,7 @@ color: rgb(0, 0, 0);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>100</y>
+       <y>110</y>
        <width>51</width>
        <height>21</height>
       </rect>
@@ -698,10 +702,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QComboBox" name="boxStep">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>100</y>
+       <x>170</x>
+       <y>110</y>
        <width>69</width>
-       <height>25</height>
+       <height>32</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -726,10 +730,10 @@ color: rgb(0, 0, 0);</string>
     <widget class="QLineEdit" name="txtOBJ">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>90</x>
        <y>30</y>
-       <width>171</width>
-       <height>25</height>
+       <width>281</width>
+       <height>32</height>
       </rect>
      </property>
      <property name="font">
@@ -751,7 +755,7 @@ color: rgb(0, 0, 0);</string>
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>51</width>
+       <width>61</width>
        <height>21</height>
       </rect>
      </property>
@@ -763,7 +767,7 @@ color: rgb(0, 0, 0);</string>
       </font>
      </property>
      <property name="text">
-      <string>Object</string>
+      <string>Object:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -772,7 +776,7 @@ color: rgb(0, 0, 0);</string>
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>470</x>
        <y>70</y>
        <width>31</width>
        <height>21</height>
@@ -792,6 +796,32 @@ color: rgb(0, 0, 0);</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>540</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>STATUS</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>
