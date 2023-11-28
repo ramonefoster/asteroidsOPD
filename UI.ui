@@ -515,6 +515,9 @@ color: rgb(0, 0, 0);</string>
       <height>550</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Right Click to Save Image</string>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(126, 126, 126);</string>
     </property>
