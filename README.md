@@ -16,3 +16,6 @@ Utilize Horizon's ephemerides to track and project the trajectory of small bodie
 
 ### Images
 <img src="Figure_1.png" alt="skymap">
+
+<h3>Requirements</h3>
+<p>astropy, astroquery, pyqt5, matplotlib, twirl </p>

@@ -57,9 +57,10 @@ class PlateSolve(threading.Thread):
                                                         solve_timeout=60)
             except TimeoutError as e:
                 submission_id = e.args[1]
+                self.result = "Astrometry Timeout..."
                 self.stop()
             except Exception as e:
-                self.result = "Stopped"
+                self.result = "Error: Solver Stopped."
                 self.stop()
             else:
                 try_again = False
