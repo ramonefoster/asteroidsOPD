@@ -19,3 +19,6 @@ Utilize Horizon's ephemerides to track and project the trajectory of small bodie
 
 <h3>Requirements</h3>
 <p>astropy, astroquery, pyqt5, matplotlib, twirl </p>
+
+### Other examples:
+<img src="etacar.png" alt="etacarinae">
